@@ -18,7 +18,7 @@ def load_data(file_loc = 'assets/data.csv', inputText=None, inputRating=None):
         data = pd.DataFrame([inputText, inputRating], columns=['sentiment', 'rating'])
         return data
 
-    return data.sample(frac=.008).reset_index(drop=True)
+    return data.sample(frac=.8).reset_index(drop=True)
 
 def preprocess_data(data):
 
