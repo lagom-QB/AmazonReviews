@@ -5,9 +5,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from app_scripts.load_preprocess_data import load_data, preprocess_data, get_sentiment, plot_ratings
-from app_scripts.model import huggingface_autoTokenizer, huggingFace_Distilbert
-from app_scripts.topic_modelling import get_topics, get_common_topics , plot_topic_repetitions, plot_topic_vs_ratings, plot_interactive_ratings
+from load_preprocess_data import load_data, preprocess_data, get_sentiment, plot_ratings
+from model import huggingface_autoTokenizer, huggingFace_Distilbert
+from topic_modelling import get_topics, get_common_topics , plot_topic_repetitions, plot_topic_vs_ratings, plot_interactive_ratings
 
 import warnings
 warnings.filterwarnings('ignore')
