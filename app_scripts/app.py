@@ -62,4 +62,4 @@ if st.button('Analyze'):
 
 st.markdown(
     '`Created by` [Brenda](https://github.com/lagom-QB) | \
-         `Code:` [GitHub](https://github.com/lagom-QB/Data-Engineering)')
+         `Code:` [GitHub](https://github.com/lagom-QB/AmazonReviews)')
