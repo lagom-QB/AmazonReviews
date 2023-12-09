@@ -8,17 +8,17 @@ import fire
 import warnings
 warnings.filterwarnings('ignore')
 sns.set_style('darkgrid')
+    
+def load_data(file_loc='assets/data.csv', inputText=None, inputRating=None):
+    data = pd.read_csv(file_loc, names=[f'column_{i}' for i in range(0, 6)])
+    # print(f'shape: {data.shape}\nNull values: {data.isnull().sum()}\n')
 
-def load_data(file_loc = 'assets/data.csv', inputText=None, inputRating=None):
-    data = pd.read_csv(file_loc, names=[f'column_{i}' for i in range(0,6)])
-    print(f'shape: {data.shape}\nNull values: {data.isnull().sum()}\n')
-
-    if inputText and inputRating:
-        # convert inputText and inputRating to dataframe
-        data = pd.DataFrame([inputText, inputRating], columns=['sentiment', 'rating'])
-        return data
-
-    return data.sample(frac=.8).reset_index(drop=True)
+    if inputText is not None and inputRating is not None:
+        # Create a new DataFrame using the inputText and inputRating
+        new_data = pd.DataFrame({'sentiment': [inputText], 'rating': [inputRating]})
+        return new_data
+    else:
+        return data.sample(frac=0.8).reset_index(drop=True)
 
 def preprocess_data(data):
 
