@@ -25,10 +25,6 @@ def preprocess_data(data):
     return data
 
 def get_sentiment(data):
-    # data['sentiment'] = data['column_1'].fillna('') + ' ' + data['column_2'].fillna('') + ' ' + data['column_4'].fillna('') + ' ' + data['column_5'].fillna('')
-    # data['rating'] = data[['column_0', 'column_3']].max(axis=1)
-    
-    # return data[['sentiment', 'rating']]
     # if a column in data has string values, add it to the category_cols list else add it to the numerical_cols list 
     category_cols, numerical_cols = [], []
     for col in data.columns:
