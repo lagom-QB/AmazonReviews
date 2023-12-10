@@ -5,6 +5,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+import datetime
+
 from load_preprocess_data import load_data, preprocess_data, get_sentiment, plot_ratings
 from model import huggingface_autoTokenizer, huggingFace_Distilbert
 from topic_modelling import get_topics, get_common_topics , plot_topic_repetitions, plot_topic_vs_ratings, plot_interactive_ratings
@@ -50,14 +52,17 @@ def get_data(inputText=None, inputRatings=None):
     return data
 
 if st.button('Analyze'):
+    start = datetime.datetime.now()
     data = get_data(inputText=inputText, inputRatings=inputRatings)
     data = get_topics(data)
     data = get_common_topics(data)
+    end = datetime.datetime.now()
 
     plot_topic_repetitions(data)
     plot_topic_vs_ratings(data)
     plot_interactive_ratings(data)
 
+    st.markdown(f'Time taken to analyze: `{end - start}`')
     st.write(data.sample(4))
 
 st.markdown(
