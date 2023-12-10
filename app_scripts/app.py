@@ -29,6 +29,7 @@ st.divider()
 inputText, inputRatings = st.text_input('Enter a review'), st.slider('Enter a rating', 1, 5)
 if inputText and inputRatings:
     st.text(f'The review you entered is "{inputText}" and the rating you entered is {inputRatings}')
+data = None
 
 # @st.cache_data
 def get_data(inputText=None, inputRatings=None):
