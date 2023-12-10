@@ -34,14 +34,14 @@ if inputText and inputRatings:
 def get_data(inputText=None, inputRatings=None):
     data1 = load_data()
     data1 = get_sentiment(data1.sample(frac=.8).reset_index(drop=True))
-    st.Text(data1.shape)
+    print(f'\n',data1.shape)
 
     data2 = load_data(inputText=inputText, inputRating=inputRatings)
-    st.Text(data2.shape)
+    print(f'\n',data2.shape)
 
     # Join data1 and data2
     data = pd.concat([data1, data2])
-    st.Text(data.shape)
+    print(f'\n',data.shape)
 
     data = huggingface_autoTokenizer(data)
     data = huggingFace_Distilbert(data)
