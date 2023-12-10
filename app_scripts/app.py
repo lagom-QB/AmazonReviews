@@ -18,7 +18,7 @@ sns.set_style('darkgrid')
 st.title('Sentiment Analysis of Amazon Reviews')
 st.markdown('`This app analyzes the sentiment of Amazon reviews`')
 st.markdown('`The data used in this app is from the` [Amazon Review Data (2018)](https://nijianmo.github.io/amazon/index.html) `by Jianmo Ni, UCSD`')
-st.markdown('`The model used in this app is the `[DistilBERT](https://huggingface.co/distilbert-base-uncased-finetuned-sst-2-english)` model by Hugging Face`\n`The model used in this app is the `[AutoTokenizer](https://huggingface.co/transformers/model_doc/auto.html)` model by Hugging Face`')
+st.markdown('`The model used in this app is the `[DistilBERT](https://huggingface.co/distilbert-base-uncased-finetuned-sst-2-english)` model by Hugging Face`')
 st.markdown('`The topic modelling used in this app is the `[Latent Dirichlet Allocation (LDA)](https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation)` model by David M. Blei, Andrew Y. Ng, Michael I. Jordan`')
 st.markdown('`The topic modelling used in this app is the `[Non-negative Matrix Factorization (NMF)](https://en.wikipedia.org/wiki/Non-negative_matrix_factorization)` model by Daniel D. Lee, H. Sebastian Seung`')
 st.markdown('`The topic modelling used is the `[Truncated Singular Value Decomposition (SVD)](https://en.wikipedia.org/wiki/Singular_value_decomposition)` model by Paul G. Constantine, David F. Gleich, Paul W. Mahoney`')
@@ -43,7 +43,7 @@ def get_data(inputText=None, inputRatings=None):
     data = pd.concat([data1, data2])
     print(f'\n',data.shape)
 
-    data = huggingface_autoTokenizer(data)
+    # data = huggingface_autoTokenizer(data) # This is less accurate that the DistilBERT model
     data = huggingFace_Distilbert(data)
     
     print(f'Got data of shape: {data.shape}')
