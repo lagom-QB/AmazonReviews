@@ -34,14 +34,14 @@ if inputText and inputRatings:
 def get_data(inputText=None, inputRatings=None):
     data1 = load_data()
     data1 = get_sentiment(data1)
-    print(f'\n',data1.shape)
+    # print(f'\n',data1.shape)
 
     data2 = load_data(inputText=inputText, inputRating=inputRatings)
-    print(f'\n',data2.shape)
+    # print(f'\n',data2.shape)
 
     # Join data1 and data2
     data = pd.concat([data1, data2])
-    print(f'\n',data.shape)
+    st.write(f'\n',data.sample(frac=.25))
 
     data = huggingface_autoTokenizer(data) # This is less accurate that the DistilBERT model
     data = huggingFace_Distilbert(data)
@@ -65,7 +65,7 @@ if st.button('Analyze'):
     st.markdown(f'Time taken to analyze: `{end - start}`')
 
     # Print the data rows with the same common_topics as the inputText
-    st.write(data[data.common_topics == data.loc[data.sentiment == inputText, 'common_topics'].values[0]])
+    st.write(data[data.common_topics == data.loc[data.sentiment == inputText, 'common_topics'].values[0]][['sentiment','huggingFace_Distilbert', 'huggingface_autoTokenizer', 'common_topics']])
 
 st.markdown(
     '`Created by` [Brenda](https://github.com/lagom-QB) | \
