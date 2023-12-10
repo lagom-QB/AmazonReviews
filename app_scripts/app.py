@@ -65,7 +65,7 @@ if st.button('Analyze'):
     st.markdown(f'Time taken to analyze: `{end - start}`')
 
     # Print the data rows with the same common_topics as the inputText
-    st.write(data[data.common_topics == data.loc[data.sentiment == inputText, 'common_topics'].values[0]][['sentiment','huggingFace_autoTokenizer','huggingFace_Distilbert', 'common_topics']])
+    st.write(data[data.common_topics == data.loc[data.sentiment == inputText, 'common_topics'].values[0]])
 
 st.markdown(
     '`Created by` [Brenda](https://github.com/lagom-QB) | \
