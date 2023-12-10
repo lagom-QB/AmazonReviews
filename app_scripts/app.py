@@ -29,7 +29,6 @@ st.divider()
 inputText, inputRatings = st.text_input('Enter a review'), st.slider('Enter a rating', 1, 5)
 if inputText and inputRatings:
     st.text(f'The review you entered is "{inputText}" and the rating you entered is {inputRatings}')
-data = None
 
 # @st.cache_data
 def get_data(inputText=None, inputRatings=None):
@@ -64,8 +63,8 @@ if st.button('Analyze'):
     end = datetime.datetime.now()
     st.markdown(f'Time taken to analyze: `{end - start}`')
 
-# Print the data rows with the same common_topics as the inputText
-st.write(data[data.common_topics == data.loc[data.sentiment == inputText, 'common_topics'].values[0]][['sentiment','huggingFace_Distilbert', 'common_topics']])
+    # Print the data rows with the same common_topics as the inputText
+    st.write(data[data.common_topics == data.loc[data.sentiment == inputText, 'common_topics'].values[0]][['sentiment','huggingFace_Distilbert', 'common_topics']])
 
 st.markdown(
     '`Created by` [Brenda](https://github.com/lagom-QB) | \
