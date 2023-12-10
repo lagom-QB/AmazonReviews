@@ -41,10 +41,7 @@ def get_data(inputText=None, inputRatings=None):
 
     # Join data1 and data2
     data = pd.concat([data1, data2])
-
     st.Text(data.shape)
-
-    # data = get_sentiment(data)
 
     data = huggingface_autoTokenizer(data)
     data = huggingFace_Distilbert(data)
