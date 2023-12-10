@@ -27,8 +27,8 @@ st.divider()
 # st.write('The interactive plots used in this app is created using [Plotly](https://plotly.com/python/) library')
 
 inputText, inputRatings = st.text_input('Enter a review'), st.slider('Enter a rating', 1, 5)
-if inputText and inputRatings:
-    st.text(f'The review you entered is "{inputText}" and the rating you entered is {inputRatings}')
+# if inputText and inputRatings:
+#     st.text(f'The review you entered is "{inputText}" and the rating you entered is {inputRatings}')
 
 # @st.cache_data
 def get_data(inputText=None, inputRatings=None):
