@@ -30,7 +30,6 @@ inputText, inputRatings = st.text_input('Enter a review'), st.slider('Enter a ra
 # if inputText and inputRatings:
 #     st.text(f'The review you entered is "{inputText}" and the rating you entered is {inputRatings}')
 
-# @st.cache_data
 def get_data(inputText=None, inputRatings=None):
     data1 = load_data()
     data1 = get_sentiment(data1)

@@ -19,14 +19,15 @@ def load_data(file_loc='assets/data.csv', inputText=None, inputRating=None):
         raise FileNotFoundError(f'File not found at {file_loc}')
     
     data = pd.read_csv(file_loc, names=[f'column_{i}' for i in range(0, 6)])
+    st.write(f'Data exists',data.head(10))
 
     if inputText is not None and inputRating is not None:
         # Create a new DataFrame using the inputText and inputRating
         new_data = pd.DataFrame({'sentiment': [inputText], 'rating': [inputRating]})
-        st.write('Returning a row of data ....', new_data)
+        st.write('Returning a row of data ....')
         return new_data
     else:
-        st.write('Returning 80% of the data ....', data.head(5))
+        st.write('Returning 80% of the data ....')
         return data.sample(frac=0.8).reset_index(drop=True)
     
 def load_data_1(file_loc='assets/data.csv', inputText=None, inputRating=None):
