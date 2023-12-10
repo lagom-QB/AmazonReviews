@@ -28,21 +28,21 @@ st.divider()
 
 inputText, inputRatings = st.text_input('Enter a review'), st.slider('Enter a rating', 1, 5)
 if inputText and inputRatings:
-    st.write(f'The review you entered is "{inputText}" and the rating you entered is {inputRatings}')
+    st.text(f'The review you entered is "{inputText}" and the rating you entered is {inputRatings}')
 
 # @st.cache_data
 def get_data(inputText=None, inputRatings=None):
     data1 = load_data()
     data1 = get_sentiment(data1.sample(frac=.8).reset_index(drop=True))
-    # print(data1.shape)
+    st.Text(data1.shape)
 
     data2 = load_data(inputText=inputText, inputRating=inputRatings)
-    # print(data2.shape)
+    st.Text(data2.shape)
 
     # Join data1 and data2
     data = pd.concat([data1, data2])
 
-    print(data.shape)
+    st.Text(data.shape)
 
     # data = get_sentiment(data)
 
