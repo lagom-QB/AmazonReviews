@@ -46,6 +46,7 @@ def get_data(inputText=None, inputRatings=None):
     data = huggingface_autoTokenizer(data)
     data = huggingFace_Distilbert(data)
     
+    print(f'Got data of shape: {data.shape}')
     return data
 
 if st.button('Analyze'):

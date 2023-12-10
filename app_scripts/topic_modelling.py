@@ -21,13 +21,13 @@ def get_topics(data, n_components=3):
     for index, row in data.iterrows():
         word_doc = vectorizer.fit_transform([row['sentiment']])
 
-        lda_model = LatentDirichletAllocation(n_components=n_components, random_state=42)
+        lda_model = LatentDirichletAllocation(random_state=42)
         lda_model.fit(word_doc)
 
-        nmf_model = NMF(n_components=n_components, random_state=42)
+        nmf_model = NMF(random_state=42)
         nmf_model.fit(word_doc)
 
-        svd_model = TruncatedSVD(n_components=n_components, random_state=42)
+        svd_model = TruncatedSVD(random_state=42)
         svd_model.fit(word_doc)
 
         feature_names = vectorizer.get_feature_names_out()
