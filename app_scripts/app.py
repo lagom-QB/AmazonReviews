@@ -34,10 +34,10 @@ inputText, inputRatings = st.text_input('Enter a review'), st.slider('Enter a ra
 def get_data(inputText=None, inputRatings=None):
     data1 = load_data()
     data1 = get_sentiment(data1)
-    # print(f'\n',data1.shape)
+    st.write(f'\n Data1',data1.shape, data1.sample(frac=.25))
 
     data2 = load_data(inputText=inputText, inputRating=inputRatings)
-    # print(f'\n',data2.shape)
+    st.write(f'\n Data2',data2.shape, data2.sample(frac=.25))
 
     # Join data1 and data2
     data = pd.concat([data1, data2])
@@ -46,7 +46,7 @@ def get_data(inputText=None, inputRatings=None):
     data = huggingface_autoTokenizer(data) # This is less accurate that the DistilBERT model
     data = huggingFace_Distilbert(data)
     
-    print(f'Got data of shape: {data.shape}')
+    st.write(f'Got data of shape: {data.shape}')
     return data
 
 if st.button('Analyze'):
