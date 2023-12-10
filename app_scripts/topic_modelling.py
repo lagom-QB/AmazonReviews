@@ -84,6 +84,7 @@ def plot_topic_repetitions(data):
     plt.yticks(fontsize=8) # Increase the font size of the y-axis tick labels
     
     plt.show()
+    return plt.gcf()
 
 def plot_topic_vs_ratings(data):
     # Plot the count of each common topic against the rating
@@ -118,6 +119,7 @@ def plot_topic_vs_ratings(data):
     plt.gca().set_yticklabels([''] + list(max_ratings_by_topic['common_topics']))
 
     plt.show()
+    return plt.gcf()
 
 def plot_interactive_ratings(data):
     max_ratings_by_topic = data[data.common_topics.isin(data.common_topics.value_counts()[data.common_topics.value_counts() > 10].index)].groupby('common_topics')['rating'].mean().reset_index()
@@ -148,6 +150,7 @@ def plot_interactive_ratings(data):
     
     # Show the interactive scatter plot
     fig.show()
+    return fig
 
 if __name__ == '__main__':
     fire.Fire(get_topics)

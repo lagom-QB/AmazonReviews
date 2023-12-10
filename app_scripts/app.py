@@ -56,9 +56,13 @@ if st.button('Analyze'):
     data = get_common_topics(data)
     end = datetime.datetime.now()
 
-    st.pyplot(plot_topic_repetitions(data).get_figure())
-    st.pyplot(plot_topic_vs_ratings(data).get_figure())
-    st.pyplot(plot_interactive_ratings(data).get_figure())
+    topic_repetitions = plot_topic_repetitions(data)
+    topic_vs_ratings = plot_topic_vs_ratings(data)
+    interactive_ratings = plot_interactive_ratings(data)
+
+    st.pyplot(topic_repetitions)
+    st.pyplot(topic_vs_ratings)
+    st.pyplot(interactive_ratings)
 
     st.markdown(f'Time taken to analyze: `{end - start}`')
 
