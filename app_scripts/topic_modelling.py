@@ -53,6 +53,7 @@ def get_common_topics(data):
         
         data.at[idx, 'common_topics'] = most_common_word
 
+    print(data.shape)
     return data
 
 def plot_topic_repetitions(data):
