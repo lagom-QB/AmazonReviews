@@ -17,10 +17,10 @@ def load_data(file_loc='assets/data.csv', inputText=None, inputRating=None):
     if inputText is not None and inputRating is not None:
         # Create a new DataFrame using the inputText and inputRating
         new_data = pd.DataFrame({'sentiment': [inputText], 'rating': [inputRating]})
-        st.write('Returning a row of data ....')
+        st.write('Returning a row of data ....', new_data)
         return new_data
     else:
-        st.write('Returning 80% of the data ....')
+        st.write('Returning 80% of the data ....', data.head(5))
         return data.sample(frac=0.8).reset_index(drop=True)
 
 def preprocess_data(data):
