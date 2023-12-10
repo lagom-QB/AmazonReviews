@@ -65,7 +65,7 @@ if st.button('Analyze'):
     st.markdown(f'Time taken to analyze: `{end - start}`')
 
     # Print the data rpw with sentiment==inputText
-    st.write(data[data.sentiment == inputText])
+    st.write(data[data.sentiment == inputText][['sentiment','huggingFace_Distilbert', 'common_topics']])
 
 st.markdown(
     '`Created by` [Brenda](https://github.com/lagom-QB) | \
