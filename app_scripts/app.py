@@ -61,7 +61,9 @@ if st.button('Analyze'):
     plot_interactive_ratings(data)
 
     st.markdown(f'Time taken to analyze: `{end - start}`')
-    st.write(data.sample(4))
+
+    # Print the data rpw with sentiment==inputText
+    st.write(data[data.sentiment == inputText])
 
 st.markdown(
     '`Created by` [Brenda](https://github.com/lagom-QB) | \
