@@ -11,8 +11,25 @@ import streamlit as st
 import warnings
 warnings.filterwarnings('ignore')
 sns.set_style('darkgrid')
-    
+
 def load_data(file_loc='assets/data.csv', inputText=None, inputRating=None):
+    # Check if file_loc exists
+    if not os.path.exists(file_loc):
+        st.write(f'File not found at {file_loc}')
+        raise FileNotFoundError(f'File not found at {file_loc}')
+    
+    data = pd.read_csv(file_loc, names=[f'column_{i}' for i in range(0, 6)])
+
+    if inputText is not None and inputRating is not None:
+        # Create a new DataFrame using the inputText and inputRating
+        new_data = pd.DataFrame({'sentiment': [inputText], 'rating': [inputRating]})
+        st.write('Returning a row of data ....', new_data)
+        return new_data
+    else:
+        st.write('Returning 80% of the data ....', data.head(5))
+        return data.sample(frac=0.8).reset_index(drop=True)
+    
+def load_data_1(file_loc='assets/data.csv', inputText=None, inputRating=None):
     # Check if file_loc exists
     if not os.path.exists(file_loc):
         st.write(f'File not found at {file_loc}')
