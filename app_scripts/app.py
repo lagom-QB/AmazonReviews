@@ -33,7 +33,7 @@ if inputText and inputRatings:
 # @st.cache_data
 def get_data(inputText=None, inputRatings=None):
     data1 = load_data()
-    data1 = get_sentiment(data1.sample(frac=.8).reset_index(drop=True))
+    data1 = get_sentiment(data1)
     print(f'\n',data1.shape)
 
     data2 = load_data(inputText=inputText, inputRating=inputRatings)
