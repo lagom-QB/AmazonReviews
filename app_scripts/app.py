@@ -60,6 +60,8 @@ if st.button('Analyze'):
     plot_topic_vs_ratings(data)
     plot_interactive_ratings(data)
 
+    plt.show()
+
     st.markdown(f'Time taken to analyze: `{end - start}`')
 
     # Print the data rpw with sentiment==inputText
