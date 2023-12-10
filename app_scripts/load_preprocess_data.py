@@ -26,7 +26,14 @@ def preprocess_data(data):
 
 def get_sentiment(data):
     data['sentiment'] = data['column_1'].fillna('') + ' ' + data['column_2'].fillna('') + ' ' + data['column_4'].fillna('') + ' ' + data['column_5'].fillna('')
-    data['rating'] = data[['column_0', 'column_3']].max(axis=1)
+    # data['rating'] = data[['column_0', 'column_3']].max(axis=1)
+    # if column_0 or column_3 exists, then use the max value of the two columns
+    # else use the value of column_0 or column_3
+    if 'column_0' in data.columns or 'column_3' in data.columns:
+        data['rating'] = data[['column_0', 'column_3']].max(axis=1)
+    else:
+        data['rating'] = data['column_0'].fillna(data['column_3'])
+
     
     return data[['sentiment', 'rating']]
 
