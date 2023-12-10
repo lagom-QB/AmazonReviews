@@ -43,7 +43,7 @@ def get_data(inputText=None, inputRatings=None):
     data = pd.concat([data1, data2])
     print(f'\n',data.shape)
 
-    # data = huggingface_autoTokenizer(data) # This is less accurate that the DistilBERT model
+    data = huggingface_autoTokenizer(data) # This is less accurate that the DistilBERT model
     data = huggingFace_Distilbert(data)
     
     print(f'Got data of shape: {data.shape}')
@@ -55,7 +55,8 @@ if st.button('Analyze'):
     data = get_topics(data)
     data = get_common_topics(data)
 
-    st.write(data.sample(frac=.25))
+    st.write(f'sample data ...\n {data.shape}',data.sample(frac=.25))
+
     st.pyplot(plot_topic_repetitions(data))
     st.pyplot(plot_topic_vs_ratings(data))
     st.write(plot_interactive_ratings(data))
@@ -64,7 +65,7 @@ if st.button('Analyze'):
     st.markdown(f'Time taken to analyze: `{end - start}`')
 
     # Print the data rows with the same common_topics as the inputText
-    st.write(data[data.common_topics == data.loc[data.sentiment == inputText, 'common_topics'].values[0]][['sentiment','huggingFace_Distilbert', 'common_topics']])
+    st.write(data[data.common_topics == data.loc[data.sentiment == inputText, 'common_topics'].values[0]][['sentiment','huggingFace_autoTokenizer','huggingFace_Distilbert', 'common_topics']])
 
 st.markdown(
     '`Created by` [Brenda](https://github.com/lagom-QB) | \
