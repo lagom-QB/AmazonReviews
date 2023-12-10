@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 
 import matplotlib.pyplot as plt
@@ -12,6 +13,11 @@ warnings.filterwarnings('ignore')
 sns.set_style('darkgrid')
     
 def load_data(file_loc='assets/data.csv', inputText=None, inputRating=None):
+    # Check if file_loc exists
+    if not os.path.exists(file_loc):
+        st.write(f'File not found at {file_loc}')
+        raise FileNotFoundError(f'File not found at {file_loc}')
+    
     data = pd.read_csv(file_loc, names=[f'column_{i}' for i in range(0, 6)])
 
     if inputText is not None and inputRating is not None:
