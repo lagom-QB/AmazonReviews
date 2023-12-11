@@ -127,7 +127,8 @@ def plot_topic_vs_ratings(data):
     return plt.gcf()
 
 def plot_interactive_ratings(data):
-    max_ratings_by_topic = data[data.common_topics.isin(data.common_topics.value_counts()[data.common_topics.value_counts() > 10].index)].groupby('common_topics')['rating'].mean().reset_index()
+    thresh_value = np.unique(data.common_topics.value_counts().values)[3]
+    max_ratings_by_topic = data[data.common_topics.isin(data.common_topics.value_counts()[data.common_topics.value_counts() > thresh_value/2].index)].groupby('common_topics')['rating'].mean().reset_index()
 
     fig = go.Figure(data=go.Scatter(
         x=max_ratings_by_topic['rating'],
