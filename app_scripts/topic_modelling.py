@@ -57,16 +57,11 @@ def get_common_topics(data):
 
 def plot_topic_repetitions(data):
     sns.set_theme(style='whitegrid')
-
+    thresh_value = np.unique(data.common_topics.value_counts().values)[3]
     value_counts = data['common_topics'].value_counts()
     # value_counts to dataframe with columns 'common_topics' and 'occurrences'
     value_counts = value_counts.reset_index()
     value_counts.columns = ['common_topics', 'occurrences']
-
-    if value_counts.occurrences.max() > 300:
-        thresh_value = value_counts.occurrences.max() * 0.1
-    else:
-        thresh_value = value_counts.occurrences.max() * 0.01
         
     common_topics = data[data['common_topics'].isin(value_counts[value_counts['occurrences'] > thresh_value]['common_topics'])]
 
@@ -102,7 +97,7 @@ def plot_topic_repetitions(data):
 
 def plot_topic_vs_ratings(data):
     thresh_value = np.unique(data.common_topics.value_counts().values)[3]
-    max_ratings_by_topic = data[data.common_topics.isin(data.common_topics.value_counts()[data.common_topics.value_counts() > thresh_value].index)].groupby('common_topics')['rating'].mean().reset_index()
+    max_ratings_by_topic = data[data.common_topics.isin(data.common_topics.value_counts()[data.common_topics.value_counts() > thresh_value/2].index)].groupby('common_topics')['rating'].mean().reset_index()
 
     # display(max_ratings_by_topic)
 
@@ -112,8 +107,15 @@ def plot_topic_vs_ratings(data):
                     palette='Set1',
                     alpha=0.7,
                     linewidth=0.2,
+                    edgecolor='white',
+                    sizes=(100, 500),
                     legend=False,
                     data=max_ratings_by_topic)
+
+    # plt.grid(False)
+    sns.despine(left=False, bottom=False)
+    plt.grid(axis='x', visible=False)
+    plt.grid(axis='y', alpha=0.3, color='gray', linestyle='--')
 
     plt.title('Common Topics and Ratings', fontsize=18)
     plt.xlabel('Ratings', fontsize=14)
