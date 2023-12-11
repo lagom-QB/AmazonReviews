@@ -73,33 +73,38 @@ def plot_topic_repetitions(data):
     topic_counts = common_topics['common_topics'].value_counts().reset_index()
     topic_counts.columns = ['common_topics', 'occurrences']
 
-    plt.figure(figsize=(10, 16))
+    plt.figure(figsize=(10, 14))
     sns.scatterplot(data=topic_counts,
                     x='occurrences',
                     y='common_topics',
                     size='occurrences',
+                    sizes=(50, 500),
                     alpha=0.7,
-                    edgecolor='black',
+                    edgecolor='white',
                     linewidth=1)
 
     plt.title('Common Topics in Reviews', fontsize=20)
     plt.xlabel('Number of Occurrences', fontsize=14)
     plt.ylabel('Common Topics', fontsize=14)
-    plt.xticks(fontsize=10)
-    plt.yticks(fontsize=10)
+    plt.yticks(fontsize=8, fontweight='light', color='gray')
+    plt.xticks(fontsize=8, fontweight='light', color='gray')
+
+    # plt.grid(False)
+    sns.despine(left=False, bottom=False)
+    plt.grid(axis='x', visible=False)
+    plt.grid(axis='y', alpha=0.3, color='gray', linestyle='--')
+
+    #adjust ytick spacing
+    # plt.gca().yaxis.set_major_locator(plt.MultipleLocator(1))
 
     plt.show()
     return plt.gcf()
 
 def plot_topic_vs_ratings(data):
-    value_counts = data.common_topics.value_counts()
-    thresh_value = pd.Series(index=value_counts.index)  # Initialize thresh_value with the same index as value_counts
-    thresh_value[value_counts > 300] = value_counts * 0.1
-    thresh_value[value_counts <= 300] = value_counts * 0.01
+    thresh_value = np.unique(data.common_topics.value_counts().values)[3]
+    max_ratings_by_topic = data[data.common_topics.isin(data.common_topics.value_counts()[data.common_topics.value_counts() > thresh_value].index)].groupby('common_topics')['rating'].mean().reset_index()
 
-    max_ratings_by_topic = data[data.common_topics.isin(value_counts[thresh_value > 0].index)].groupby('common_topics')['rating'].mean().reset_index()  # Use thresh_value > 0 to filter the index
-
-    display(max_ratings_by_topic)
+    # display(max_ratings_by_topic)
 
     plt.figure(figsize=(8, 20))
     sns.scatterplot(x='rating',
