@@ -29,7 +29,7 @@ def load_data(file_loc='assets/data.csv', inputText=None, inputRating=None):
             st.write('Returning a row of data ....')
             return new_data
         else:
-            st.write('Returning 8% of the data ....')
+            st.write(f'Returning 8% of the data .... {data.shape}')
             return data.sample(frac=0.08).reset_index(drop=True)
     
 def load_data_1(file_loc='assets/data.csv', inputText=None, inputRating=None):
