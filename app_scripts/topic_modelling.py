@@ -54,68 +54,52 @@ def get_common_topics(data):
         data.at[idx, 'common_topics'] = most_common_word
 
     return data
-
-def plot_topic_repetitions(data):
-    sns.set_theme(style='darkgrid')
-
-    common_topics = data[data.common_topics.isin(data.common_topics.value_counts()[data.common_topics.value_counts() > 100].index)]
-
-    # Plot the count of each common topic
-    size_dict = common_topics['common_topics'].value_counts().to_dict()
-
-    # Create a DataFrame for the value counts
-    topic_counts = pd.DataFrame(list(size_dict.items()), columns=['common_topics', 'occurrences'])
-
-    # Adjust figure size to avoid a value error
-    plt.figure(figsize=(10, 18))
-
-    # Create the bubble plot
-    sns.barplot(data=topic_counts,
-                    y='common_topics',  # Plot common_topics on the x-axis
-                    x='occurrences',  # Plot occurrences on the y-axis
-                    alpha=0.7,
-                    edgecolor='white',
-                    linewidth=.2)
-
-    plt.title('Common Topics in Reviews', fontsize=20) # Add a title
-    plt.xlabel('Number of Occurrences', fontsize=14) # Label the x-axis
-    plt.ylabel('Common Topics', fontsize=14) # Label the y-axis
-    plt.xticks(fontsize=8) # Increase the font size of the x-axis tick labels
-    plt.yticks(fontsize=8) # Increase the font size of the y-axis tick labels
     
+ def plot_topic_repetitions(data):
+    sns.set_theme(style='whitegrid')
+
+    value_counts = data['common_topics'].value_counts()
+    common_topics = data[data['common_topics'].isin(value_counts.index[value_counts > 100])]
+
+    topic_counts = common_topics['common_topics'].value_counts().reset_index()
+    topic_counts.columns = ['common_topics', 'occurrences']
+
+    plt.figure(figsize=(10, 10))
+    sns.scatterplot(data=topic_counts,
+                    x='occurrences',
+                    y='common_topics',
+                    size='occurrences',
+                    alpha=0.7,
+                    edgecolor='black',
+                    linewidth=1)
+
+    plt.title('Common Topics in Reviews', fontsize=20)
+    plt.xlabel('Number of Occurrences', fontsize=14)
+    plt.ylabel('Common Topics', fontsize=14)
+    plt.xticks(fontsize=10)
+    plt.yticks(fontsize=10)
+
     plt.show()
     return plt.gcf()
 
 def plot_topic_vs_ratings(data):
-    # Plot the count of each common topic against the rating
-
-    # Calculate the maximum rating from the dataset
     max_ratings_by_topic = data[data.common_topics.isin(data.common_topics.value_counts()[data.common_topics.value_counts() > 20].index)].groupby('common_topics')['rating'].mean().reset_index()
 
-    # display(max_ratings_by_topic)
-
-    # Adjust figure size
     plt.figure(figsize=(8, 20))
-
-    # Create the bubble plot
-    sns.scatterplot(x='rating',  # Placeholder x-value, will be overridden by hue
-                    y='common_topics',  # Plot common_topics on the y-axis
+    sns.scatterplot(x='rating',
+                    y='common_topics',
                     palette='Set1',
                     alpha=0.7,
                     linewidth=0.2,
                     legend=False,
-                    data=max_ratings_by_topic)  # Use the calculated maximum ratings by topic
+                    data=max_ratings_by_topic)
 
-    plt.title('Common Topics and Ratings', fontsize=18) # Add a title
-
-    plt.xlabel('Ratings', fontsize=14) # Label the x-axis
-    plt.ylabel('Common Topics', fontsize=14) # Label the y-axis
-
-    plt.xticks(fontsize=8) # Increase the font size of the x-axis tick labels
-    plt.yticks(fontsize=8) # Increase the font size of the y-axis tick labels
-
-    plt.xlim(0, 6) # Set the x-axis limits
-    # Add spacing between the y-axis tick labels
+    plt.title('Common Topics and Ratings', fontsize=18)
+    plt.xlabel('Ratings', fontsize=14)
+    plt.ylabel('Common Topics', fontsize=14)
+    plt.xticks(fontsize=8)
+    plt.yticks(fontsize=8)
+    plt.xlim(0, 6)
     plt.gca().set_yticklabels([''] + list(max_ratings_by_topic['common_topics']))
 
     plt.show()
@@ -123,32 +107,27 @@ def plot_topic_vs_ratings(data):
 
 def plot_interactive_ratings(data):
     max_ratings_by_topic = data[data.common_topics.isin(data.common_topics.value_counts()[data.common_topics.value_counts() > 10].index)].groupby('common_topics')['rating'].mean().reset_index()
-    
-    # Create a scatter plot
+
     fig = go.Figure(data=go.Scatter(
-        x=max_ratings_by_topic['rating'],  # Use the ratings as x-values
-        y=max_ratings_by_topic['common_topics'],  # Use the common_topics as y-values
-        mode='markers',  # Set the mode to markers for a scatter plot
+        x=max_ratings_by_topic['rating'],
+        y=max_ratings_by_topic['common_topics'],
+        mode='markers',
         marker=dict(
-            color=max_ratings_by_topic['rating'],  # Color the markers based on the ratings
-            # colorscale='turbo',  # Choose a color scale
-            # colorbar=dict(title='Ratings'),  # Add a color bar with a title
-            size=10  # Set the marker size
+            color=max_ratings_by_topic['rating'],
+            size=10
         )
     ))
-    
-    # Customize the layout
+
     fig.update_layout(
-        title='Common Topics and Average Ratings',  # Add a title
-        xaxis_title='Ratings',  # Label the x-axis
-        yaxis_title='Common Topics',  # Label the y-axis
-        font=dict(size=10),  # Set the font size
-        height=1000,  # Set the height of the plot
+        title='Common Topics and Average Ratings',
+        xaxis_title='Ratings',
+        yaxis_title='Common Topics',
+        font=dict(size=10),
+        height=1000,
     )
 
     fig.update_yaxes(automargin=True)
-    
-    # Show the interactive scatter plot
+
     fig.show()
     return fig
 
