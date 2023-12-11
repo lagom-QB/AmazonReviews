@@ -12,11 +12,11 @@ import warnings
 warnings.filterwarnings('ignore')
 sns.set_style('darkgrid')
 
-def load_data(file_loc='assets/data1.csv', inputText=None, inputRating=None):
+def load_data(file_loc='assets/data.csv', inputText=None, inputRating=None):
     # Check if file_loc exists
     if not os.path.exists(file_loc):
         st.write(f'{file_loc} not found at "asset"')
-        raise FileNotFoundError(f'{file_loc} not found at "asset"')
+        raise FileNotFoundError(f'File not found at "asset"')
     else:
         # st.write(f'File not found at "asset" ... Folder contains: {os.listdir("assets")}') # data.csv
         data = pd.read_csv(file_loc)
