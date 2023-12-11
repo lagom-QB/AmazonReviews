@@ -17,7 +17,7 @@ sns.set_style('darkgrid')
 
 st.title('Sentiment Analysis of Amazon Reviews')
 # st.caption('This app analyzes the sentiment of Amazon reviews')
-st.text('The data used in this app is from the [Amazon Review Data (2018)](https://nijianmo.github.io/amazon/index.html) by Jianmo Ni, UCSD')
+st.text(f'The data used in this app is from the {[Amazon Review Data (2018)](https://nijianmo.github.io/amazon/index.html)} by Jianmo Ni, UCSD')
 st.caption('The model used in this app is the [DistilBERT](https://huggingface.co/distilbert-base-uncased-finetuned-sst-2-english) model by Hugging Face')
 st.caption('The topic modelling used in this app is the [Latent Dirichlet Allocation (LDA)](https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation) model by David M. Blei, Andrew Y. Ng, Michael I. Jordan')
 st.caption('The topic modelling used in this app is the [Non-negative Matrix Factorization (NMF)](https://en.wikipedia.org/wiki/Non-negative_matrix_factorization) model by Daniel D. Lee, H. Sebastian Seung')
