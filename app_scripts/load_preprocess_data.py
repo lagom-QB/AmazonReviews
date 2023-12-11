@@ -21,8 +21,8 @@ def load_data(file_loc='assets/data.csv', inputText=None, inputRating=None):
         # st.write(f'File not found at {file_loc} ... Folder contains: {os.listdir("assets")}') # data.csv
         data = pd.read_csv(file_loc)
         num_cols = len(data.columns)
-        data.columns = [f'column_{i}' for i in range(0, num_cols+1)]
-        
+        data.columns = [f'column_{i}' for i in range(0, num_cols)]
+
         st.write(f'Data exists',data.head(10))
 
         if inputText is not None and inputRating is not None:
