@@ -19,7 +19,7 @@ def load_data(file_loc='assets', inputText=None, inputRating=None):
         raise FileNotFoundError(f'File not found at {file_loc}')
     else:
         # st.write(f'File not found at {file_loc} ... Folder contains: {os.listdir("assets")}') # data.csv
-        data = pd.read_csv(file_loc+'/'+os.listdir("assets"))
+        data = pd.read_csv(file_loc+'/'+os.listdir("assets")[0])
         num_cols = len(data.columns)
         data.columns = [f'column_{i}' for i in range(0, num_cols)]
 
