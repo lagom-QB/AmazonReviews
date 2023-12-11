@@ -47,6 +47,7 @@ def get_sentiment(data):
         else:
             numerical_cols.append(col)
     
+    st.write(f'category_cols: {category_cols} \n numerical_cols: {numerical_cols}')
     data['sentiment'] = data[category_cols].fillna('').agg(' '.join, axis=1)
     # data['rating'] = data[numerical_cols].max(axis=1)
     data['rating'] = data.loc[:, data.columns != data.index].max(axis=1)
