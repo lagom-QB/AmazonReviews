@@ -12,20 +12,21 @@ import warnings
 warnings.filterwarnings('ignore')
 sns.set_style('darkgrid')
 
-def load_data(file_loc='assets', inputText=None, inputRating=None):
+def load_data(folder='assets', inputText=None, inputRating=None):
+    file_loc = folder+'/'+os.listdir("assets")[0]
     # Check if file_loc exists
     if not os.path.exists(file_loc):
-        st.write(f'File not found at {file_loc}')
-        raise FileNotFoundError(f'File not found at {file_loc}')
+        st.write(f'{os.listdir("assets")[0]} not found at {folder}')
+        raise FileNotFoundError(f'File not found at {folder}')
     else:
-        # st.write(f'File not found at {file_loc} ... Folder contains: {os.listdir("assets")}') # data.csv
-        data = pd.read_csv(file_loc+'/'+os.listdir("assets")[0])
+        # st.write(f'File not found at {folder} ... Folder contains: {os.listdir("assets")}') # data.csv
+        data = pd.read_csv(file_loc)
         num_cols = len(data.columns)
         data.columns = [f'column_{i}' for i in range(0, num_cols)]
 
         st.write(f'Data exists {data.head(10)}')
 
-        # if inputText is not None and inputRating is not None:
+        # if inputText is not None:
         #     # Create a new DataFrame using the inputText and inputRating
         #     new_data = pd.DataFrame({'sentiment': [inputText], 'rating': [inputRating]})
         #     st.write('Returning a row of data ....')
