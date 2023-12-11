@@ -25,6 +25,7 @@ def load_data(file_loc='assets/data.csv', inputText=None, inputRating=None):
 
         if inputText is not None and inputRating > 0:
             # Create a new DataFrame using the inputText and inputRating
+            st.write(f'inputText: {inputText} \n inputRating: {inputRating}')
             new_data = pd.DataFrame({'sentiment': [inputText], 'rating': [inputRating]})
             st.write(f'Returning a row of data .... {new_data.shape}')
             return new_data
