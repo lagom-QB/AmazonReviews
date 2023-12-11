@@ -24,7 +24,7 @@ def load_data(folder='assets', inputText=None, inputRating=None):
         num_cols = len(data.columns)
         data.columns = [f'column_{i}' for i in range(0, num_cols)]
 
-        st.write(f'{os.listdir("assets")[0]} not found at {folder}')
+        st.write(f'{os.listdir("assets")[0]} found at {folder}')
         st.write(f'Data exists {data.head(10)}')
 
         # if inputText is not None:
