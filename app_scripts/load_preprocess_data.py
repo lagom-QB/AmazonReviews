@@ -23,10 +23,10 @@ def load_data(file_loc='assets/data.csv', inputText=None, inputRating=None):
         num_cols = len(data.columns)
         data.columns = [f'column_{i}' for i in range(0, num_cols)]
 
-        if inputText is not None:
+        if inputText is not None and inputRating > 0:
             # Create a new DataFrame using the inputText and inputRating
             new_data = pd.DataFrame({'sentiment': [inputText], 'rating': [inputRating]})
-            st.write('Returning a row of data ....')
+            st.write(f'Returning a row of data .... {new_data.shape}')
             return new_data
         else:
             st.write(f'Returning 8% of the data .... {data.shape}')
