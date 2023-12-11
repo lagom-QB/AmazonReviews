@@ -32,21 +32,21 @@ inputText, inputRatings = st.text_input('Enter a review'), st.slider('Enter a ra
 
 def get_data(inputText=None, inputRatings=None):
     data1 = load_data()
-    data1 = get_sentiment(data1)
-    st.write(f'\n Data1',data1.shape, data1.sample(frac=.25))
+    # data1 = get_sentiment(data1)
+    # st.write(f'\n Data1',data1.shape, data1.sample(frac=.25))
 
-    data2 = load_data(inputText=inputText, inputRating=inputRatings)
-    st.write(f'\n Data2',data2.shape, data2.sample(frac=.25))
+    # data2 = load_data(inputText=inputText, inputRating=inputRatings)
+    # st.write(f'\n Data2',data2.shape, data2.sample(frac=.25))
 
-    # Join data1 and data2
-    data = pd.concat([data1, data2])
-    st.write(f'\n',data.sample(frac=.25))
+    # # Join data1 and data2
+    # data = pd.concat([data1, data2])
+    # st.write(f'\n',data.sample(frac=.25))
 
-    data = huggingface_autoTokenizer(data) # This is less accurate that the DistilBERT model
-    data = huggingFace_Distilbert(data)
+    # data = huggingface_autoTokenizer(data) # This is less accurate that the DistilBERT model
+    # data = huggingFace_Distilbert(data)
     
-    st.write(f'Got data of shape: {data.shape}')
-    return data
+    # st.write(f'Got data of shape: {data.shape}')
+    return data1
 
 if st.button('Analyze'):
     start = datetime.datetime.now()
