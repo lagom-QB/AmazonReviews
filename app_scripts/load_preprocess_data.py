@@ -12,7 +12,7 @@ import warnings
 warnings.filterwarnings('ignore')
 sns.set_style('darkgrid')
 
-def load_data(file_loc='assets/data.csv', inputText=None, inputRating=None):
+def load_data(file_loc='assets/data1.csv', inputText=None, inputRating=None):
     # Check if file_loc exists
     if not os.path.exists(file_loc):
         st.write(f'{os.listdir("assets")[0]} not found at "asset"')
@@ -22,9 +22,6 @@ def load_data(file_loc='assets/data.csv', inputText=None, inputRating=None):
         data = pd.read_csv(file_loc)
         num_cols = len(data.columns)
         data.columns = [f'column_{i}' for i in range(0, num_cols)]
-
-        st.write(f'{os.listdir("assets")[0]} found at "asset"')
-        st.write(f'Data exists {data.head(10)}')
 
         # if inputText is not None:
         #     # Create a new DataFrame using the inputText and inputRating
