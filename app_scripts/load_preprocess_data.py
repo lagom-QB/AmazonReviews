@@ -31,7 +31,7 @@ def load_data(file_loc='assets/data.csv', inputText=None, inputRating=None):
             # st.write(new_data)
             return new_data
         else:
-            st.write(f'Returning 8% of the data .... {data.shape}')
+            # st.write(f'Returning 8% of the data .... {data.shape}')
             return data#.sample(frac=0.08).reset_index(drop=True)
 
 def preprocess_data(data):
@@ -49,8 +49,8 @@ def get_sentiment(data):
     
     st.write(f'category_cols: {category_cols} \n numerical_cols: {numerical_cols}')
     data['sentiment'] = data[category_cols].fillna('').agg(' '.join, axis=1)
-    # data['rating'] = data[numerical_cols].max(axis=1)
-    data['rating'] = data.loc[:, data.columns != data.index].max(axis=1)
+    data['rating'] = data[numerical_cols].max(axis=1)
+    # data['rating'] = data.loc[:, data.columns != data.index].max(axis=1)
 
     return data[['sentiment', 'rating']]
 
