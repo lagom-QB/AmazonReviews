@@ -18,21 +18,15 @@ def load_data(file_loc='assets/data.csv', inputText=None, inputRating=None):
         st.write(f'{file_loc} not found at "asset"')
         raise FileNotFoundError(f'File not found at "asset"')
     else:
-        # st.write(f'File not found at "asset" ... Folder contains: {os.listdir("assets")}') # data.csv
         data = pd.read_csv(file_loc)
         num_cols = len(data.columns)
         data.columns = [f'column_{i}' for i in range(0, num_cols)]
 
         if inputText is not None and inputRating > 0:
-            # Create a new DataFrame using the inputText and inputRating
-            # st.write(f'inputText: {inputText} \n inputRating: {inputRating}')
             new_data = pd.DataFrame({'sentiment': [inputText], 'rating': [inputRating]})
-            # st.write(f'Returning a row of data .... {new_data.shape}')
-            # st.write(new_data)
             return new_data
         else:
-            # st.write(f'Returning 8% of the data .... {data.shape}')
-            return data#.sample(frac=0.08).reset_index(drop=True)
+            return data.sample(frac=0.08).reset_index(drop=True)
 
 def preprocess_data(data):
 
@@ -47,10 +41,8 @@ def get_sentiment(data):
         else:
             numerical_cols.append(col)
     
-    # st.write(f'category_cols: {category_cols} \n numerical_cols: {numerical_cols}')
     data['sentiment'] = data[category_cols].fillna('').agg(' '.join, axis=1)
     data['rating'] = data[numerical_cols].max(axis=1)
-    # data['rating'] = data.loc[:, data.columns != data.index].max(axis=1)
 
     return data[['sentiment', 'rating']]
 
