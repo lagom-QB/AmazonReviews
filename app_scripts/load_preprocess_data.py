@@ -23,14 +23,14 @@ def load_data(file_loc='assets/data.csv', inputText=None, inputRating=None):
         num_cols = len(data.columns)
         data.columns = [f'column_{i}' for i in range(0, num_cols)]
 
-        # if inputText is not None:
-        #     # Create a new DataFrame using the inputText and inputRating
-        #     new_data = pd.DataFrame({'sentiment': [inputText], 'rating': [inputRating]})
-        #     st.write('Returning a row of data ....')
-        #     return new_data
-        # else:
-        #     st.write('Returning 8% of the data ....')
-        #     return data.sample(frac=0.08).reset_index(drop=True)
+        if inputText is not None:
+            # Create a new DataFrame using the inputText and inputRating
+            new_data = pd.DataFrame({'sentiment': [inputText], 'rating': [inputRating]})
+            st.write('Returning a row of data ....')
+            return new_data
+        else:
+            st.write('Returning 8% of the data ....')
+            return data.sample(frac=0.08).reset_index(drop=True)
     
 def load_data_1(file_loc='assets/data.csv', inputText=None, inputRating=None):
     # Check if file_loc exists
