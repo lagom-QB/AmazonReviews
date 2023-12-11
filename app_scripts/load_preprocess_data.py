@@ -12,7 +12,7 @@ import warnings
 warnings.filterwarnings('ignore')
 sns.set_style('darkgrid')
 
-def load_data(file_loc='../assets/data.csv', inputText=None, inputRating=None):
+def load_data(file_loc='/assets/data.csv', inputText=None, inputRating=None):
     # Check if file_loc exists
     if not os.path.exists(file_loc):
         st.write(f'File not found at {file_loc}')
