@@ -8,6 +8,8 @@ import fire
 import concurrent.futures
 from tqdm import tqdm
 
+import streamlit as st
+
 import warnings
 warnings.filterwarnings('ignore')
 sns.set_style('darkgrid')
@@ -61,6 +63,18 @@ def huggingFace_Distilbert(data):
     data['huggingFace_Distilbert'] = [output['label'] for output in batched_outputs]
     
     return data
+
+def evaluate_models(data):
+    # Get the accuracy of the models
+    data['huggingface_autoTokenizer_correct'] = data['huggingface_autoTokenizer'] == data['rating']
+    data['huggingFace_Distilbert_correct'] = data['huggingFace_Distilbert'] == data['rating']
+
+    # Get the accuracy of the models
+    huggingface_autoTokenizer_accuracy = data['huggingface_autoTokenizer_correct'].sum() / len(data)
+    huggingFace_Distilbert_accuracy = data['huggingFace_Distilbert_correct'].sum() / len(data)
+
+    st.write(f'huggingface_autoTokenizer_accuracy: {huggingface_autoTokenizer_accuracy}')
+    st.write(f'huggingFace_Distilbert_accuracy: {huggingFace_Distilbert_accuracy}')
 
 if __name__ == '__main__':
     fire.Fire(huggingface_autoTokenizer)

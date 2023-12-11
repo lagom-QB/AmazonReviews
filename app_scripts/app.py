@@ -53,7 +53,7 @@ if st.button('Analyze'):
     data = get_topics(data)
     data = get_common_topics(data)
 
-    st.write(f'sample data ...\n {data.shape}',data.sample(frac=.25))
+    # st.write(f'sample data ...\n {data.shape}',data.sample(frac=.25))
 
     st.pyplot(plot_topic_repetitions(data))
     st.pyplot(plot_topic_vs_ratings(data))
