@@ -54,8 +54,8 @@ def get_common_topics(data):
         data.at[idx, 'common_topics'] = most_common_word
 
     return data
-    
- def plot_topic_repetitions(data):
+
+def plot_topic_repetitions(data):
     sns.set_theme(style='whitegrid')
 
     value_counts = data['common_topics'].value_counts()
