@@ -36,11 +36,11 @@ def get_data(inputText=None, inputRatings=None):
     # st.write(f'\n Data1',data1.shape, data1.sample(frac=.25))
 
     data2 = load_data(inputText=inputText, inputRating=inputRatings)
-    st.write(f'\n Data2',data2.shape, data2.sample(frac=.25))
+    # st.write(f'\n Data2',data2.shape, data2.sample(frac=.25))
 
     # Join data1 and data2
     data = pd.concat([data1, data2])
-    st.write(f'\n',data.sample(frac=.25))
+    st.write(f'Data (Confirm the ratings)... \n',data.sample(frac=.25))
 
     data = huggingface_autoTokenizer(data) # This is less accurate that the DistilBERT model
     data = huggingFace_Distilbert(data)
