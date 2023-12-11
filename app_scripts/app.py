@@ -40,31 +40,31 @@ def get_data(inputText=None, inputRatings=None):
 
     # Join data1 and data2
     data = pd.concat([data1, data2])
-    st.write(f'Data (Confirm the ratings)... \n',data.sample(frac=.25))
+    # st.write(f'Data (Confirm the ratings)... \n',data.sample(frac=.25))
 
     data = huggingface_autoTokenizer(data) # This is less accurate that the DistilBERT model
     data = huggingFace_Distilbert(data)
     
-    st.write(f'Got data of shape: {data.shape}')
+    # st.write(f'Got data of shape: {data.shape}')
     return data1
 
 if st.button('Analyze'):
     start = datetime.datetime.now()
     data = get_data(inputText=inputText, inputRatings=inputRatings)
-    # data = get_topics(data)
-    # data = get_common_topics(data)
+    data = get_topics(data)
+    data = get_common_topics(data)
 
-    # st.write(f'sample data ...\n {data.shape}',data.sample(frac=.25))
+    st.write(f'sample data ...\n {data.shape}',data.sample(frac=.25))
 
-    # st.pyplot(plot_topic_repetitions(data))
-    # st.pyplot(plot_topic_vs_ratings(data))
-    # st.write(plot_interactive_ratings(data))
+    st.pyplot(plot_topic_repetitions(data))
+    st.pyplot(plot_topic_vs_ratings(data))
+    st.write(plot_interactive_ratings(data))
 
-    # end = datetime.datetime.now()
-    # st.markdown(f'Time taken to analyze: `{end - start}`')
+    end = datetime.datetime.now()
+    st.markdown(f'Time taken to analyze: `{end - start}`')
 
-    # # Print the data rows with the same common_topics as the inputText
-    # st.write(data[data.common_topics == data.loc[data.sentiment == inputText, 'common_topics'].values[0]][['sentiment','huggingFace_Distilbert', 'huggingface_autoTokenizer', 'common_topics']])
+    # Print the data rows with the same common_topics as the inputText
+    st.write(data[data.common_topics == data.loc[data.sentiment == inputText, 'common_topics'].values[0]][['sentiment','huggingFace_Distilbert', 'huggingface_autoTokenizer', 'common_topics']])
 
 st.markdown(
     '`Created by` [Brenda](https://github.com/lagom-QB) | \
