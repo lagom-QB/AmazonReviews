@@ -59,12 +59,21 @@ def plot_topic_repetitions(data):
     sns.set_theme(style='whitegrid')
 
     value_counts = data['common_topics'].value_counts()
-    common_topics = data[data['common_topics'].isin(value_counts.index[value_counts > 100])]
+    # value_counts to dataframe with columns 'common_topics' and 'occurrences'
+    value_counts = value_counts.reset_index()
+    value_counts.columns = ['common_topics', 'occurrences']
+
+    if value_counts.occurrences.max() > 300:
+        thresh_value = value_counts.occurrences.max() * 0.1
+    else:
+        thresh_value = value_counts.occurrences.max() * 0.01
+        
+    common_topics = data[data['common_topics'].isin(value_counts[value_counts['occurrences'] > thresh_value]['common_topics'])]
 
     topic_counts = common_topics['common_topics'].value_counts().reset_index()
     topic_counts.columns = ['common_topics', 'occurrences']
 
-    plt.figure(figsize=(10, 10))
+    plt.figure(figsize=(10, 16))
     sns.scatterplot(data=topic_counts,
                     x='occurrences',
                     y='common_topics',
@@ -83,7 +92,14 @@ def plot_topic_repetitions(data):
     return plt.gcf()
 
 def plot_topic_vs_ratings(data):
-    max_ratings_by_topic = data[data.common_topics.isin(data.common_topics.value_counts()[data.common_topics.value_counts() > 20].index)].groupby('common_topics')['rating'].mean().reset_index()
+    value_counts = data.common_topics.value_counts()
+    thresh_value = pd.Series(index=value_counts.index)  # Initialize thresh_value with the same index as value_counts
+    thresh_value[value_counts > 300] = value_counts * 0.1
+    thresh_value[value_counts <= 300] = value_counts * 0.01
+
+    max_ratings_by_topic = data[data.common_topics.isin(value_counts[thresh_value > 0].index)].groupby('common_topics')['rating'].mean().reset_index()  # Use thresh_value > 0 to filter the index
+
+    display(max_ratings_by_topic)
 
     plt.figure(figsize=(8, 20))
     sns.scatterplot(x='rating',
