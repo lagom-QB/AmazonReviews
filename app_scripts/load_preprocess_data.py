@@ -15,7 +15,7 @@ sns.set_style('darkgrid')
 def load_data(file_loc='assets/data1.csv', inputText=None, inputRating=None):
     # Check if file_loc exists
     if not os.path.exists(file_loc):
-        st.write(f'{os.listdir("assets")[0]} not found at "asset"')
+        st.write(f'{file_loc} not found at "asset"')
         raise FileNotFoundError(f'File not found at "asset"')
     else:
         # st.write(f'File not found at "asset" ... Folder contains: {os.listdir("assets")}') # data.csv
