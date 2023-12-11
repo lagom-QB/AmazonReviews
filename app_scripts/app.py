@@ -2,9 +2,6 @@ import streamlit as st
 
 import pandas as pd
 
-import matplotlib.pyplot as plt
-import seaborn as sns
-
 import datetime
 
 from load_preprocess_data import load_data, preprocess_data, get_sentiment, plot_ratings
@@ -24,19 +21,12 @@ st.caption('The topic modelling used in this app is the [Non-negative Matrix Fac
 st.caption('The topic modelling used is the [Truncated Singular Value Decomposition (SVD)](https://en.wikipedia.org/wiki/Singular_value_decomposition) model by Paul G. Constantine, David F. Gleich, Paul W. Mahoney')
 st.divider()
 
-# st.write('The interactive plots used in this app is created using [Plotly](https://plotly.com/python/) library')
-
 # st slider and input text side by side
 inputText, inputRatings = st.columns(2)
 with inputText:
     inputText = st.text_input('Enter a review')
 with inputRatings:
     inputRatings = st.slider('Enter a rating', 1, 5)
-
-
-# inputText, inputRatings = st.text_input('Enter a review'), st.slider('Enter a rating', 1, 5)
-# if inputText and inputRatings:
-#     st.text(f'The review you entered is "{inputText}" and the rating you entered is {inputRatings}')
 
 def get_data(inputText=None, inputRatings=None):
     data1 = load_data()
