@@ -31,7 +31,7 @@ inputText, inputRatings = st.text_input('Enter a review'), st.slider('Enter a ra
 #     st.text(f'The review you entered is "{inputText}" and the rating you entered is {inputRatings}')
 
 def get_data(inputText=None, inputRatings=None):
-    data1 = load_data(file_loc='assets/data1.csv')
+    data1 = load_data()
     data1 = get_sentiment(data1)
     # st.write(f'\n Data1',data1.shape, data1.sample(frac=.25))
 
