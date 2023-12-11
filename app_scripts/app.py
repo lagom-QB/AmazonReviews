@@ -44,7 +44,7 @@ def get_data(inputText=None, inputRatings=None):
     data = huggingFace_Distilbert(data)
     
     # st.write(f'Got data of shape: {data.shape}')
-    return data1
+    return data
 
 if st.button('Analyze'):
     start = datetime.datetime.now()
